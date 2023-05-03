@@ -89,8 +89,8 @@ if (newExternalsArray.length) {
   fs.writeFileSync(
     path.resolve(WORKING_PATH, EXTERNALS_FILENAME),
     FILE_INSTRUCTION +
-    JSON.stringify(newExternalsArray, null, 2) +
-    `\n/** Generated timestamp: ${Date.now()} */`
+      JSON.stringify(newExternalsArray, null, 2) +
+      `\n/** Generated timestamp: ${Date.now()} */`
   );
   exec(`git add ${EXTERNALS_FILENAME}`);
 }

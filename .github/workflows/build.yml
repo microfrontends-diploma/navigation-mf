@@ -1,0 +1,46 @@
+name: microfrontend-CI
+on:
+  push:
+    branches: ["dev"]
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Run linter
+        id: lint
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: lint # will run `yarn lint` command
+        continue-on-error: true
+
+      - name: Run formatter-check
+        id: format-check
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: check-format # will run `yarn check-format` command
+        continue-on-error: true
+
+      - name: Run formatter
+        if: (${{steps.lint.outputs.exit_code}} != 0 || ${{steps.format-check.outputs.exit_code}} != 0)
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: format # will run `yarn format` command
+
+      - name: Build production bundle
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build # will run `yarn build` command

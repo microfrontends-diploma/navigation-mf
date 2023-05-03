@@ -10,9 +10,9 @@ export const EventEmitterProvider = ({
   children,
   evEmitter,
 }: EventEmitterProviderProps) => (
-  <eventEmitterContext.Provider
-    value={evEmitter}
-  >{children}</eventEmitterContext.Provider>
+  <eventEmitterContext.Provider value={evEmitter}>
+    {children}
+  </eventEmitterContext.Provider>
 );
 
 export const useEventEmitter = () => useContext(eventEmitterContext);

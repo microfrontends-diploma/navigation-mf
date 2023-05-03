@@ -8,10 +8,10 @@ import Root from "./root.component";
 const lifecycles = singleSpaReact({
   React,
   ReactDOM,
-  rootComponent: (props: Record<string, any> & {evEmitter: EventEmitter}) => {
+  rootComponent: (props: Record<string, any> & { evEmitter: EventEmitter }) => {
     return (
       <EventEmitterProvider evEmitter={props.evEmitter}>
-        <Root/>
+        <Root />
       </EventEmitterProvider>
     );
   },

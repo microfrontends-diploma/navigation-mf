@@ -3,8 +3,7 @@
   "scripts": {
     "start": "webpack serve --port 8500",
     "start:standalone": "webpack serve --env standalone",
-    "build": "concurrently yarn:build:*",
-    "build:webpack": "webpack --mode=production",
+    "build": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
     "lint": "eslint src --ext js,ts,tsx",
     "format": "prettier --write .",
@@ -13,7 +12,6 @@
     "watch-tests": "cross-env BABEL_ENV=test jest --watch",
     "prepare": "husky install",
     "coverage": "cross-env BABEL_ENV=test jest --coverage",
-    "build:types": "tsc",
     "generate:externals": "node ./custom_hooks/pre-add.js \"$(pwd)\""
   },
   "devDependencies": {
@@ -26,6 +24,7 @@
     "@babel/runtime": "^7.15.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
+    "@types/reach__router": "^1.3.11",
     "@types/testing-library__jest-dom": "^5.14.1",
     "babel-jest": "^27.0.6",
     "concurrently": "^6.2.1",
@@ -51,6 +50,10 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.11.16",
     "@reach/router": "^1.3.4",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.19",
@@ -63,6 +66,5 @@
     "react-router-dom": "^6.8.2",
     "single-spa": "^5.9.3",
     "single-spa-react": "^4.3.1"
-  },
-  "types": "dist/andy-inc-navbar-mf.d.ts"
+  }
 }
