@@ -1,46 +1,45 @@
-name: microfrontend-CI
+name: navigation-mf-CI
 on:
   push:
     branches: ["dev"]
+  pull_request:
+    branches: ["dev"]
+
+env:
+  CONTAINER_TAG: navigation-mf
+  FILE_NAME: navigation-mf.cid
 
 jobs:
   build:
-    name: Test
-    runs-on: ubuntu-latest
+    name: build
+    runs-on: [self-hosted, linux, X64]
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
+      - name: reading running container id
+        id: container-id
+        run: |
+          FILE="/home/`whoami`/docker-containers-id/$FILE_NAME"
+          if [ -f "$FILE" ]; then
+            ID=`cat $FILE`
+            echo "id=$ID" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install # will run `yarn install` command
+      - name: stopping container, deleting file
+        run: |
+          FILE="/home/`whoami`/docker-containers-id/$FILE_NAME"
+          if [ ! -z "${{steps.container-id.outputs.id}}" ]; then
+            rm $FILE
+            docker stop ${{steps.container-id.outputs.id}}
+          fi
 
-      - name: Run linter
-        id: lint
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: lint # will run `yarn lint` command
-        continue-on-error: true
+      - name: remove previous docker image
+        run: docker rmi -f $CONTAINER_TAG
 
-      - name: Run formatter-check
-        id: format-check
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: check-format # will run `yarn check-format` command
-        continue-on-error: true
+      - name: build docker image
+        run: docker build . --file Dockerfile-storybook -t $CONTAINER_TAG
 
-      - name: Run formatter
-        if: (${{steps.lint.outputs.exit_code}} != 0 || ${{steps.format-check.outputs.exit_code}} != 0)
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: format # will run `yarn format` command
-
-      - name: Build production bundle
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build # will run `yarn build` command
+      - name: run docker container and save id
+        run: |
+          FILE="/home/`whoami`/docker-containers-id/$FILE_NAME"
+          docker run --cidfile $FILE -d -p 8500:8500 $CONTAINER_TAG
