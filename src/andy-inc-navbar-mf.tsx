@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import singleSpaReact from "single-spa-react";
 import { EventEmitterProvider } from "./EventEmitterContext";
-import Root from "./root.component";
+import Root from ".";
 
 const lifecycles = singleSpaReact({
   React,

@@ -66,5 +66,6 @@
     "react-router-dom": "^6.8.2",
     "single-spa": "^5.9.3",
     "single-spa-react": "^4.3.1"
-  }
+  },
+  "types": "dist/andy-inc-navbar-mf.d.ts"
 }

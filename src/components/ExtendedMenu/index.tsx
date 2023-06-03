@@ -31,9 +31,9 @@ const ExtendedMenu = ({
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "100%",
+        height: "100vh",
         padding: "20px",
-        backgroundColor: "wheat",
+        backgroundColor: "#ebebeb",
       }}
     >
       <Button onClick={onToggleMenuHandler}>
@@ -52,7 +52,6 @@ const ExtendedMenu = ({
                 }}
               >
                 {link?.icon}
-                {/* TODO: если текущий активный микрофронтенд равняется ссылке - не переходить на нее и не закрывать меню, иначе закрыть меню */}
                 <Link
                   to={link.url}
                   onClick={onMicroFrontendLinkClick(link.url)}

@@ -14,9 +14,10 @@ const HiddenMenu = ({ toggleMenu, activeMenuPoint }: HiddenMenuProps) => {
       <Box
         sx={{
           display: "flex",
-          backgroundColor: "black",
+          backgroundColor: "#ebebeb",
           borderRadius: "10px",
           padding: "5px 12px",
+          alignItems: 'center',
         }}
       >
         <Button onClick={onToggleMenuHandler}>
