@@ -37,7 +37,7 @@ jobs:
         run: docker rmi -f $CONTAINER_TAG
 
       - name: build docker image
-        run: docker build . --file Dockerfile-storybook -t $CONTAINER_TAG
+        run: docker build . -t $CONTAINER_TAG
 
       - name: run docker container and save id
         run: |
