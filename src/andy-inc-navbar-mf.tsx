@@ -2,17 +2,18 @@ import EventEmitter from "events";
 import React from "react";
 import ReactDOM from "react-dom";
 import singleSpaReact from "single-spa-react";
-import { EventEmitterProvider } from "./EventEmitterContext";
-import Root from ".";
+import { AppPropsProvider } from "./context";
+import Navbar from ".";
+import { AppProps } from "single-spa";
 
 const lifecycles = singleSpaReact({
   React,
   ReactDOM,
-  rootComponent: (props: Record<string, any> & { evEmitter: EventEmitter }) => {
+  rootComponent: (props: AppProps & { eventEmitter: EventEmitter }) => {
     return (
-      <EventEmitterProvider evEmitter={props.evEmitter}>
-        <Root />
-      </EventEmitterProvider>
+      <AppPropsProvider props={props}>
+        <Navbar />
+      </AppPropsProvider>
     );
   },
   errorBoundary(err, info, props) {

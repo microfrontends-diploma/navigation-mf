@@ -1,21 +1,8 @@
 import { Box, Button, Grid, Grow, Typography } from "@mui/material";
-import { ReactNode } from "react";
 import { Link } from "@reach/router";
+import { ExtendedMenuProps } from "./types";
 
-export interface ExtendedMenuProps {
-  links: Array<{ url: string; label: string; icon?: ReactNode }>;
-  onActiveMenuPointChange: (activeMenuPoint: string) => void;
-  // FIXME: все что ниже - общее, надо это вынести
-  toggleMenu: (open: boolean) => void;
-  activeMenuPoint: string;
-}
-
-const ExtendedMenu = ({
-  links,
-  activeMenuPoint,
-  onActiveMenuPointChange,
-  toggleMenu,
-}: ExtendedMenuProps) => {
+const ExtendedMenu = ({ links, activeMenuPoint, onActiveMenuPointChange, toggleMenu }: ExtendedMenuProps) => {
   const onToggleMenuHandler = () => toggleMenu(false);
 
   const onMicroFrontendLinkClick = (newMenuPoint: string) => () => {
@@ -25,7 +12,6 @@ const ExtendedMenu = ({
     }
   };
 
-  // TODO: Подумать, как меню должно выглядеть в адаптивном варианте
   return (
     <Box
       sx={{
@@ -37,7 +23,7 @@ const ExtendedMenu = ({
       }}
     >
       <Button onClick={onToggleMenuHandler}>
-        <Typography variant="h4">Меню</Typography>
+        <Typography variant='h4'>Меню</Typography>
       </Button>
 
       <Grid container sx={{ mt: "20px" }}>
@@ -52,10 +38,7 @@ const ExtendedMenu = ({
                 }}
               >
                 {link?.icon}
-                <Link
-                  to={link.url}
-                  onClick={onMicroFrontendLinkClick(link.url)}
-                >
+                <Link to={link.url} onClick={onMicroFrontendLinkClick(link.url)}>
                   {link.label}
                 </Link>
               </Box>

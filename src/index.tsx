@@ -1,11 +1,10 @@
-import { useEffect, useLayoutEffect, useState } from "react";
-import { useEventEmitter } from "./EventEmitterContext";
-import ExtendedMenu from "./components/ExtendedMenu";
-import HiddenMenu from "./components/HiddenMenu";
+import { useEffect, useState } from "react";
+import { ExtendedMenu, HiddenMenu } from "./components";
+import { useAppProps } from "./context";
 
 // TODO: добавить возможность для рендера неактивных юрлов
 export const Navbar = () => {
-  const eventEmitter = useEventEmitter(); 
+  const { name, eventEmitter } = useAppProps();
 
   const [links, setLinks] = useState<string[]>([]);
   const [menuExtended, setMenuExtended] = useState<boolean>(false);
@@ -13,16 +12,17 @@ export const Navbar = () => {
   const [activeMenuPoint, setActiveMenuPoint] = useState<string | null>(window.location.pathname);
 
   const routesEvent = (args) => {
-    setLinks(["/home", ...(args as string[]).map(route => `/${route}`)]);
+    // TODO: перенести все маршруты в root-config
+    setLinks(["/home", ...(args as string[]).map((route) => `/${route}`), "/settings"]);
   };
 
   useEffect(() => {
     if (eventEmitter) {
-      eventEmitter.on("routes", routesEvent);
+      eventEmitter.on(name, routesEvent);
     }
 
     return () => {
-      eventEmitter.off("routes", routesEvent);
+      eventEmitter.off(name, routesEvent);
     };
   }, [eventEmitter]);
 
@@ -34,10 +34,7 @@ export const Navbar = () => {
       onActiveMenuPointChange={setActiveMenuPoint}
     />
   ) : (
-    <HiddenMenu
-      toggleMenu={setMenuExtended}
-      activeMenuPoint={activeMenuPoint}
-    />
+    <HiddenMenu toggleMenu={setMenuExtended} activeMenuPoint={activeMenuPoint} />
   );
 };
 

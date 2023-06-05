@@ -1,27 +1,35 @@
 {
-  "vsproj.enabled": true,
-  "vsproj.itemType": {
-    "*": "Content",
-    ".js": "Compile",
-    ".jsx": "Compile",
-    ".ts": "TypeScriptCompile",
-    ".tsx": "TypeScriptCompile"
+  "scss.validate": false,
+  "css.validate": false,
+  "less.validate": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "vsproj.excludeRegex": "node_modules",
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescriptreact",
-    "typescript"
-  ],
+  "security.workspace.trust.untrustedFiles": "open",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "prettier.singleQuote": true,
+  "files.autoSaveDelay": 500,
+  "eslint.alwaysShowStatus": true,
+  "javascript.format.insertSpaceAfterConstructor": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
-  },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "todo-tree.filtering.excludeGlobs": [
-    "**/node_modules/*",
-    "**/node_modules/**/*"
-  ]
+    "source.fixAll.eslint": true
+  }
 }

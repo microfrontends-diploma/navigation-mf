@@ -1,10 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-
-// FIXME: общие пропсы - вынести
-interface HiddenMenuProps {
-  toggleMenu: (open: boolean) => void;
-  activeMenuPoint: string;
-}
+import { HiddenMenuProps } from "./types";
 
 const HiddenMenu = ({ toggleMenu, activeMenuPoint }: HiddenMenuProps) => {
   const onToggleMenuHandler = () => toggleMenu(true);
@@ -17,15 +12,15 @@ const HiddenMenu = ({ toggleMenu, activeMenuPoint }: HiddenMenuProps) => {
           backgroundColor: "#ebebeb",
           borderRadius: "10px",
           padding: "5px 12px",
-          alignItems: 'center',
+          alignItems: "center",
         }}
       >
         <Button onClick={onToggleMenuHandler}>
-          <Typography variant="h5">Меню</Typography>
+          <Typography variant='h5'>Меню</Typography>
         </Button>
 
         <Box>
-          <Typography variant="h6">{activeMenuPoint}</Typography>
+          <Typography variant='h6'>{activeMenuPoint}</Typography>
         </Box>
       </Box>
     </Box>
