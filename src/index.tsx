@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { ExtendedMenu, HiddenMenu } from "./components";
 import { useAppProps } from "./context";
 
-// TODO: добавить возможность для рендера неактивных юрлов
 export const Navbar = () => {
   const { name, eventEmitter } = useAppProps();
 
   const [links, setLinks] = useState<string[]>([]);
   const [menuExtended, setMenuExtended] = useState<boolean>(false);
-  // FIXME: надо создать специальный тип
   const [activeMenuPoint, setActiveMenuPoint] = useState<string | null>(window.location.pathname);
 
   const routesEvent = (args) => {

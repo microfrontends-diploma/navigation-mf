@@ -1,5 +1,6 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import { HiddenMenuProps } from "./types";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const HiddenMenu = ({ toggleMenu, activeMenuPoint }: HiddenMenuProps) => {
   const onToggleMenuHandler = () => toggleMenu(true);
@@ -9,15 +10,16 @@ const HiddenMenu = ({ toggleMenu, activeMenuPoint }: HiddenMenuProps) => {
       <Box
         sx={{
           display: "flex",
-          backgroundColor: "#ebebeb",
+          backgroundColor: "primary.main",
+          color: 'white',
           borderRadius: "10px",
           padding: "5px 12px",
           alignItems: "center",
         }}
       >
-        <Button onClick={onToggleMenuHandler}>
-          <Typography variant='h5'>Меню</Typography>
-        </Button>
+          <IconButton sx={{color: 'white'}} onClick={onToggleMenuHandler}>
+            <MenuIcon/>
+          </IconButton>
 
         <Box>
           <Typography variant='h6'>{activeMenuPoint}</Typography>

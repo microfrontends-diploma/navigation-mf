@@ -4,6 +4,7 @@ const path = require("path");
 const exec = require("child_process").exec;
 
 const WORKING_PATH = process.argv[2];
+const SINGLE_SPA_LIB = 'single-spa';
 
 const pjson = require(path.resolve(WORKING_PATH, "package.json"));
 const webpackConfig = require(path.resolve(WORKING_PATH, "webpack.config"));
@@ -15,7 +16,9 @@ const FILE_INSTRUCTION =
   "\tIt has all externals libraries\n" +
   "\tBefore committing the changes make sure you've pasted correct cdn link for each library respectively \n*/\n";
 
-const externals = webpackConfig()?.externals || [];
+let externals = webpackConfig()?.externals || [];
+externals = externals.filter(externalLib => externalLib !== SINGLE_SPA_LIB);
+
 const dependencies = pjson["dependencies"];
 
 const newExternalsArray = [];
@@ -89,8 +92,8 @@ if (newExternalsArray.length) {
   fs.writeFileSync(
     path.resolve(WORKING_PATH, EXTERNALS_FILENAME),
     FILE_INSTRUCTION +
-      JSON.stringify(newExternalsArray, null, 2) +
-      `\n/** Generated timestamp: ${Date.now()} */`
+    JSON.stringify(newExternalsArray, null, 2) +
+    `\n/** Generated timestamp: ${Date.now()} */`
   );
   exec(`git add ${EXTERNALS_FILENAME}`);
 }
