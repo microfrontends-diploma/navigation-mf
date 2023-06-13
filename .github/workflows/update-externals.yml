@@ -1,4 +1,4 @@
-name: navigation-mf-CI
+name: navigation-mf-update-externals
 on:
   push:
     branches: ["dev"]
@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: getting microfrontend name
         id: mf-name
-        run: python3
+        run: python3 .github/scripts/mf-name.py
 
       - name: debug step
         run: echo ${{steps.mf-name.outputs.mf-name}}
