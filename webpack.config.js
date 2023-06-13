@@ -21,5 +21,6 @@ module.exports = (webpackConfigEnv, argv) => {
         src: path.resolve(__dirname, "src"),
       },
     },
+    externals: ["@mui/material", "@mui/icons-material"]
   });
 };
