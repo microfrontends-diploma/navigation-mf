@@ -27,6 +27,8 @@ def main():
             payload = {"name": name, "externals": externals, "env": "prod"}
             payload_json = json.dumps(payload)
 
+            print(f"payload_json {payload_json}")
+
             connection.request(
                 "POST", "/update-externals", body=payload_json, headers=headers
             )
