@@ -8,14 +8,9 @@ const COMMENTS_ESCAPE_REGEX = /(\/\*{1,}[^\/]{0,}\*{1,}\/)/gm;
 
 const webpackConfig = require(path.resolve(WORKING_PATH, "webpack.config.js"));
 
-if (
-  webpackConfig()?.externals &&
-  !fs.existsSync(path.resolve(WORKING_PATH, EXTERNALS_FILENAME))
-) {
+if (webpackConfig()?.externals && !fs.existsSync(path.resolve(WORKING_PATH, EXTERNALS_FILENAME))) {
   console.error("Make sure the file for external libraries exists!");
-  console.info(
-    "To generate file for external libraries run yarn generate:externals"
-  );
+  console.info('To generate file for external libraries run "yarn generate:externals" or "npm run generate:externals"');
   process.exit(1);
 }
 
@@ -26,17 +21,12 @@ if (fs.existsSync(path.resolve(WORKING_PATH, EXTERNALS_FILENAME))) {
   // TODO: протестировать (что если файл действительно никак не был изменен?)
   exec(`git diff --name-only ${EXTERNALS_FILENAME}`, (_, stdout) => {
     if (!stdout.length) {
-      console.error(
-        "Make sure you ran yarn generate:externals before commiting your code!"
-      );
+      console.error("Make sure you ran yarn generate:externals before commiting your code!");
       process.exit(1);
     }
   });
 
-  const fileContent = fs
-    .readFileSync(path.resolve(WORKING_PATH, EXTERNALS_FILENAME))
-    .toString()
-    .replace(COMMENTS_ESCAPE_REGEX, "");
+  const fileContent = fs.readFileSync(path.resolve(WORKING_PATH, EXTERNALS_FILENAME)).toString().replace(COMMENTS_ESCAPE_REGEX, "");
   const jsonArray = JSON.parse(fileContent);
 
   const libsToCheck = [];
@@ -53,11 +43,7 @@ if (fs.existsSync(path.resolve(WORKING_PATH, EXTERNALS_FILENAME))) {
   }
 
   if (!checkPassed) {
-    console.error(
-      `You haven't specify urls for following libraries:\n${libsToCheck.join(
-        "\n"
-      )}`
-    );
+    console.error(`You haven't specify urls for following libraries:\n${libsToCheck.join("\n")}`);
     process.exit(1);
   }
 }

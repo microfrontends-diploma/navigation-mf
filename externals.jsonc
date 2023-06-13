@@ -6,22 +6,22 @@
 [
   {
     "lib": "react",
-    "url": "",
+    "url": "https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js",
     "action": "added"
   },
   {
     "lib": "react-dom",
-    "url": "",
+    "url": "https://cdn.jsdelivr.net/npm/react-dom@17.0.2/index.min.js",
     "action": "added"
   },
   {
     "lib": "@mui/material",
-    "url": "",
+    "url": "https://cdn.jsdelivr.net/npm/@mui/material@5.11.16/umd/material-ui.production.min.js",
     "action": "added"
   },
   {
     "lib": "@mui/icons-material",
-    "url": "",
+    "url": "https://cdn.jsdelivr.net/npm/@mui/icons-material@5.11.16/utils/createSvgIcon.min.js",
     "action": "added"
   }
 ]

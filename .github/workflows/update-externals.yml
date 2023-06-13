@@ -14,5 +14,8 @@ jobs:
         id: mf-name
         run: python3
 
+      - name: debug step
+        run: echo ${{steps.mf-name.outputs.mf-name}}
+
       - name: sending request to EDS (external libraries server)
         run: python3 .github/scripts/ext-libraries.py ${{steps.mf-name.outputs.mf-name}}
